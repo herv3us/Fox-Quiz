@@ -12,15 +12,21 @@
         <h1 id="fox-title">Fox Quiz</h1>
     </header>
     <div class="picture">
-        <img src="/img/fox1.jpg" alt="pic of fox" class="img">
+        <img src="https://images.unsplash.com/photo-1557008075-7f2c5efa4cfd?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1242&q=80" alt="pic of fox" class="img">
     </div>
 
-    <div class="questions">
-        <h4 class="question-title"></h4>
-        <button class="answer"></button>
-        <button class="answer"></button>
-        <button class="answer"></button>
+    <div class="questions" id="quiz">
+        <h2 class="question-title" id="question">Fråga</h4>
+        <ul>
+            <li>
+                <input type="radio" name="answer" id="a" class="answer"></input> <label for="a" id="a_text">Svar</label> </li>
+            <li>
+                <input type="radio" name="answer" id="b" class="answer"></input><label for="b" id="b_text">Svar</label> </li>
+            <li>
+                <input type="radio" name="answer" id="c"  class="answer"></input><label for="c" id="c_text">Svar</label> </li>
+        </ul>
     </div>
+    <button id="svara">Svara</button>
     <script src="app.js"></script>
 </body>
 </html>
