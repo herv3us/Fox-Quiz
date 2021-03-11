@@ -11,20 +11,20 @@
     <section>
         <h1 id="fox-title">Fox Quiz</h1>
         <div class="picture">
-            <img src="/img/fox1.jpg" alt="pic of fox" class="img">
+            <img src="https://images.unsplash.com/photo-1557008075-7f2c5efa4cfd?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1242&q=80" alt="pic of fox" class="img">
         </div>
     </section>
 
-    <div class="questions">
+    <div class="questions" id="quiz">
         <div class="result hide">Poäng</div>
         <button id="start-game" class="btn">Start game</button>
-        <h4 class="question-title" class="hide"></h4>
+        <h2 class="question-title" id="question"></h2>
         <div class="answer hide">
-            <button class="btn">answer 1</button>
-            <button class="btn">answer 2</button>
-            <button class="btn">answer 3</button>
+            <button class="btn" id="a_text">answer 1</button>
+            <button class="btn" id="b_text">answer 2</button>
+            <button class="btn" id="c_text">answer 3</button>
         </div>
-        <button class="submit btn hide">Next</button>
+        <button class="submit btn hide" id="svara">Next</button>
     </div>
     <script src="app.js"></script>
 </body>
