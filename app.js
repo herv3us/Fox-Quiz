@@ -1,3 +1,40 @@
+const startButton = document.getElementById("start-game");
+const questionTitle = document.querySelector(".question-title");
+const answerButtons = document.querySelector(".answer");
+
+let currentQuestionQounter = 0;
+let score = 0;
+
+//Function som startar spelet
+const startGame = () =>{
+    console.log("Startar spelet!");
+    startButton.classList.add("hide");
+    answerButtons.classList.remove("hide");
+    nextQuestion();
+}
+
+//Function som visar frågan..
+const showQuestion = () =>{
+    questionTitle.innerText = foxquiz[0].question;
+}
+
+//Function som tar fram nästa fråga
+const nextQuestion = () =>{
+    showQuestion();
+}
+
+//Function för att välja alternativ av svar
+const chooceAnswer = () =>{
+    
+}
+
+startButton.addEventListener("click", startGame);
+
+
+
+
+
+
 const foxquiz = [
     {
         question: '1. Vad heter rödräv på latin?',
@@ -49,32 +86,5 @@ const foxquiz = [
         correctAnswer: 'Klok och listig',
     },
     
-]
+];
 
-
-const startButton = document.getElementById("start-game");
-const questionTitle = document.querySelector(".question-title");
-const answerButtons = document.querySelector(".answer");
-
-//Function som startar spelet
-const startGame = () =>{
-    console.log("Startar spelet!")
-    startButton.classList.add("hide")
-}
-
-//Function som visar frågan..
-const showQuestion = () =>{
-    
-}
-
-//Function som tar fram nästa fråga
-const nextQuestion = () =>{
-    
-}
-
-//Function för att välja alternativ av svar
-const chooceAnswer = () =>{
-    
-}
-
-startButton.addEventListener("click", startGame);
