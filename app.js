@@ -18,12 +18,10 @@ const startGame = () =>{
 const showQuestion = () =>{
     questionTitle.innerText = foxquiz[0].question;
 
-    foxquiz.answer.forEach(answer => {
+    foxquiz.forEach(answer => {
         const button = document.createElement("button");
-        button.innerText = answer.text;
         button.classList.add("btn");
-
-        button.textContent = foxquiz.answer1;
+        button.innerText = foxquiz.answer1;
         button.addEventListener("click", chooceAnswer);
     });
 
