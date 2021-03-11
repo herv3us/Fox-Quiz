@@ -39,6 +39,7 @@ const showQuestion = () =>{
         endGame.classList.remove("hide");
         questionTitle.innerText = "";
     }
+
     // if(foxquiz[currentQuiz].answers.correct === true){
     //     score+=50;
     // }
