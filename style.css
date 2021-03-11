@@ -36,6 +36,7 @@ section .picture img{
 }
 
 .questions{
+    position: relative;
     width: 50%;
     display: flex;
     flex-direction: column;
@@ -65,4 +66,12 @@ section .picture img{
 
 .hide{
     display: none;
+}
+
+.result{
+    position: absolute;
+    top: 30px;
+    right: 50px;
+    font-size: 20px;
+    text-transform: uppercase;
 }

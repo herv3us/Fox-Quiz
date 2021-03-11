@@ -52,17 +52,29 @@ const foxquiz = [
 ]
 
 
+const startButton = document.getElementById("start-game");
+const questionTitle = document.querySelector(".question-title");
+const answerButtons = document.querySelector(".answer");
+
 //Function som startar spelet
 const startGame = () =>{
+    console.log("Startar spelet!")
+    startButton.classList.add("hide")
+}
 
+//Function som visar frågan..
+const showQuestion = () =>{
+    
 }
 
 //Function som tar fram nästa fråga
 const nextQuestion = () =>{
-
+    
 }
 
 //Function för att välja alternativ av svar
 const chooceAnswer = () =>{
-
+    
 }
+
+startButton.addEventListener("click", startGame);
