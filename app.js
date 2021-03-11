@@ -50,3 +50,19 @@ const foxquiz = [
     },
     
 ]
+
+
+//Function som startar spelet
+const startGame = () =>{
+
+}
+
+//Function som tar fram nästa fråga
+const nextQuestion = () =>{
+
+}
+
+//Function för att välja alternativ av svar
+const chooceAnswer = () =>{
+
+}
