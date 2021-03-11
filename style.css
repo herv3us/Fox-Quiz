@@ -46,8 +46,7 @@ section .picture img{
 
 .questions .question-title{
     font-size: 25px;
-    text-transform: uppercase;
-    font-family: sans-serif;
+    letter-spacing: 2px;
 }
 
 .btn{

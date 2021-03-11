@@ -1,6 +1,8 @@
 const startButton = document.getElementById("start-game");
 const questionTitle = document.querySelector(".question-title");
 const answerButtons = document.querySelector(".answer");
+const endGame = document.querySelector(".endGame");
+const points = document.querySelector(".result");
 // -----
 const a_text = document.getElementById('a_text');
 const b_text = document.getElementById('b_text');
@@ -8,7 +10,7 @@ const c_text = document.getElementById('c_text');
 const sumbitBtn = document.getElementById('svara');
 
 
-let currentQuiz= 0;
+let currentQuiz = 0;
 let score = 0;
 
 //Function som startar spelet
@@ -21,29 +23,34 @@ const startGame = () =>{
 
 //Function som visar frågan..
 const showQuestion = () =>{
-    questionTitle.innerText = foxquiz[currentQuiz].question;
+   
+    if (currentQuiz < foxquiz.length){
+        questionTitle.innerText = foxquiz[currentQuiz].question;
 
-    foxquiz[currentQuiz].answers.forEach(answer => {
-        const button = document.createElement("button");
-        button.innerText = answer.text;
-        console.log(answer)
-        button.classList.add("btn");
-        if(answer.correct){
-            button.dataset.correct = answer.correct
-        }
-        button.addEventListener("click", chooceAnswer);
-        answerButtons.appendChild(button);
-        
-    });
+        foxquiz[currentQuiz].answers.forEach(answer => {
+            const button = document.createElement("button");
+            button.innerText = answer.text;
+            console.log(answer)
+            button.classList.add("btn");
+            button.addEventListener("click", chooceAnswer);
+            answerButtons.appendChild(button);
+        });
+    } else {
+        endGame.classList.remove("hide");
+        questionTitle.innerText = "";
+    }
+    // if(foxquiz[currentQuiz].answers.correct === true){
+    //     score+=50;
+    // }
 };
 
-//Function som tar bort "överflödiga knappar"
+//Function som tar bort "överflödiga knappar" & tar bort hide från next.
 const resetAll = () => {
     sumbitBtn.classList.add("hide");
     while(answerButtons.firstChild){
         answerButtons.removeChild(answerButtons.firstChild)
     }
-}
+};
 
 
 //Function som tar fram nästa fråga
@@ -60,11 +67,19 @@ const chooceAnswer = (choice) =>{
     
 };
 
-//Börjar spelet respektive går till nästa fråga!!
+//Börjar spelet respektive går till nästa fråga, samt avsluta..!!
 startButton.addEventListener("click", startGame);
 sumbitBtn.addEventListener("click", () => {
     currentQuiz++;
     nextQuestion();
+});
+endGame.addEventListener("click",() =>{
+    points.innerText = `${score} poäng`
+    points.classList.remove("hide");
+    endGame.classList.add("hide");
+    questionTitle.style.fontSize = "30px";
+    questionTitle.innerText = `Du hade ${score} av ${foxquiz.length * 10} rätt! Bra jobbat!`;
+
 });
 
 
