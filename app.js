@@ -3,6 +3,7 @@ const questionTitle = document.querySelector(".question-title");
 const answerButtons = document.querySelector(".answer");
 const endGame = document.querySelector(".endGame");
 const points = document.querySelector(".result");
+const picture = document.getElementById("pic");
 // -----
 const a_text = document.getElementById('a_text');
 const b_text = document.getElementById('b_text');
@@ -34,15 +35,16 @@ const showQuestion = () =>{
             button.classList.add("btn");
             button.addEventListener("click", chooceAnswer);
             answerButtons.appendChild(button);
+            picture.src = `/img/fox--${currentQuiz}.jpg`
+            
+                if(foxquiz[currentQuiz].answers.correct === true){
+                    score+=10;
+                }
         });
     } else {
         endGame.classList.remove("hide");
         questionTitle.innerText = "";
     }
-
-    // if(foxquiz[currentQuiz].answers.correct === true){
-    //     score+=50;
-    // }
 };
 
 //Function som tar bort "överflödiga knappar" & tar bort hide från next.
@@ -79,9 +81,15 @@ endGame.addEventListener("click",() =>{
     points.classList.remove("hide");
     endGame.classList.add("hide");
     questionTitle.style.fontSize = "30px";
-    questionTitle.innerText = `Du hade ${score} av ${foxquiz.length * 10} rätt! Bra jobbat!`;
+
+    if(score > 0){
+        questionTitle.innerText = `Du hade ${score} av ${foxquiz.length * 10} rätt! Bra jobbat!`;
+    } else {
+        questionTitle.innerText = `Tyvärr fick du ${score} poäng utav ${foxquiz.length * 10}! Bättre lycka nästa gång.`;
+    }
 
 });
+
 
 
 
