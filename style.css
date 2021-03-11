@@ -70,6 +70,10 @@ section .picture img{
     margin: .3rem;
 }
 
+#svara{
+    margin-top:.7rem;
+}
+
 .hide{
     display: none;
 }

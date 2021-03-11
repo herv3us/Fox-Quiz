@@ -8,7 +8,7 @@ const c_text = document.getElementById('c_text');
 const sumbitBtn = document.getElementById('svara');
 
 
-let currentQuiz = 0;
+let currentQuiz= 0;
 let score = 0;
 
 //Function som startar spelet
@@ -21,33 +21,51 @@ const startGame = () =>{
 
 //Function som visar frågan..
 const showQuestion = () =>{
-    questionTitle.innerText = foxquiz[0].question;
+    questionTitle.innerText = foxquiz[currentQuiz].question;
 
-    foxquiz.answer.forEach(answer => {
+    foxquiz[currentQuiz].answers.forEach(answer => {
         const button = document.createElement("button");
         button.innerText = answer.text;
+        console.log(answer)
         button.classList.add("btn");
-
-        button.textContent = foxquiz.answer1;
+        if(answer.correct){
+            button.dataset.correct = answer.correct
+        }
         button.addEventListener("click", chooceAnswer);
+        answerButtons.appendChild(button);
+        
     });
 };
+
+//Function som tar bort "överflödiga knappar"
+const resetAll = () => {
+    sumbitBtn.classList.add("hide");
+    while(answerButtons.firstChild){
+        answerButtons.removeChild(answerButtons.firstChild)
+    }
+}
 
 
 //Function som tar fram nästa fråga
 const nextQuestion = () =>{
+    resetAll();
     showQuestion();
 };
 
 
 //Function för att välja alternativ av svar
-const chooceAnswer = () =>{
+const chooceAnswer = (choice) =>{
+    const choosenAnswer = choice.target;
+    sumbitBtn.classList.remove("hide");
     
 };
 
-//Börjar spelet!!
+//Börjar spelet respektive går till nästa fråga!!
 startButton.addEventListener("click", startGame);
-
+sumbitBtn.addEventListener("click", () => {
+    currentQuiz++;
+    nextQuestion();
+});
 
 
 
@@ -55,41 +73,46 @@ startButton.addEventListener("click", startGame);
 const foxquiz = [
     {
         question: '1. Vad heter rödräv på latin?',
-        answer1: 'Vulpes vulpes',
-        answer2: 'Ulves ulves',
-        answer3: 'Foxes foxes',
-        correctAnswer: 'Vulpes vulpes',
+        answers: [
+             {text: "Vulpes vulpes", correct: true},
+             {text: "Ulves ulves", correct: false},
+             {text: "Foxes foxes", correct: false}
+        ],
     },
     {
         question: '2. Hur mycket väger en räv?',
-        answer1: '5-10 kg',
-        answer2: '10-15 kg',
-        answer3: '15-20 kg',
-        correctAnswer: '5-10 kg',
+        answers: [
+            {text: "5-10kg", correct: true},
+            {text: "10-15kg", correct: false},
+            {text: "15-20kg", correct: false}
+        ]
     },
 
     {
         question: '3. Hur många ungar får en rävhona per kull?',
-        answer1: '1-3',
-        answer2: '2-5',
-        answer3: '4-7',
-        correctAnswer: '4-7',
+        answers: [
+            {text: "1-3", correct: false},
+            {text: "2-5", correct: false},
+            {text: "4-7", correct: true}
+        ]
     },
     
     {
         question: '4. Vilka är rävens viktigaste sinnen?',
-        answer1: 'Hörselsinnet och luktsinnet',
-        answer2: 'Smaksinnet och hörselsinnet',
-        answer3: 'Smaksinnet',
-        correctAnswer: 'Hörselsinnet och luksinnet',
+        answers: [
+            {text: "Hörselsinnet och luktsinnet", correct: true},
+            {text: "Smaksinnet och hörselsinnet", correct: false},
+            {text: "Smaksinnet", correct: false}
+        ]
     },
 
     {
         question: '5. Med vilka egenskaper brukar räven benämnas i fabler?',
-        answer1: 'Rolig och smart',
-        answer2: 'Snabb och smidig',
-        answer3: 'Klok och listig',
-        correctAnswer: 'Klok och listig',
+        answers: [
+            {text: "Rolig och smart", correct: false},
+            {text: "Snabb och smidig", correct: false},
+            {text: "Klok och listig", correct: true}
+        ]
     },
     
 ];
