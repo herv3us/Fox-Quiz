@@ -1,7 +1,14 @@
 const startButton = document.getElementById("start-game");
 const questionTitle = document.querySelector(".question-title");
 const answerButtons = document.querySelector(".answer");
+const endGame = document.querySelector(".endGame");
+const points = document.querySelector(".result");
+const picture = document.getElementById("pic");
 const sumbitBtn = document.getElementById('svara');
+
+sumbitBtn.style.fontSize = "30px";
+sumbitBtn.style.backgroundColor = "#a1683f";
+sumbitBtn.style.color = "#eee";
 
 let currentQuiz = 0;
 let score = 0;
@@ -13,57 +20,72 @@ const startGame = () =>{
     nextQuestion();
 };
 
-
 //Function som visar frågan..
 const showQuestion = () =>{
-    questionTitle.innerText = foxquiz[0].question;
+    if (currentQuiz < foxquiz.length){
+        questionTitle.innerText = foxquiz[currentQuiz].question;
 
-    foxquiz.forEach(answer => {
-        const button = document.createElement("button");
-        button.classList.add("btn");
-        button.innerText = foxquiz.answer1;
-        button.addEventListener("click", chooceAnswer);
-    });
+        foxquiz[currentQuiz].answers.forEach(answer => {
+            const button = document.createElement("button");
+            button.innerText = answer.text;
+            console.log(answer)
+            button.classList.add("btn");
+            button.addEventListener("click", chooceAnswer);
+            answerButtons.appendChild(button);
+            picture.src = `/img/fox--${currentQuiz}.jpg`
 
-    
+            // if(answer.correct){
+            //     score+=10;
+            // }
+        });
+    } else {
+        endGame.classList.remove("hide");
+        questionTitle.innerText = "";
+    }
 };
 
-sumbitBtn.addEventListener('click', () => {
-    const answer = getSelected()
-    
-    //Funktion för att kontrollera rätt svar och lägg till en poäng om det är rätt
-    if(answer === foxquiz[currentQuiz].correctAnswer) {
-        score++;
+//Function som tar bort "överflödiga knappar" & tar bort hide från next.
+const resetAll = () => {
+    sumbitBtn.classList.add("hide");
+    while(answerButtons.firstChild){
+        answerButtons.removeChild(answerButtons.firstChild)
     }
-
-    //Funktion för att komma till nästa fråga
-
-    currentQuiz++;
-
-    //Såvida vi är inte är slutet av quizet
-
-    if(currentQuiz < foxquiz.length) {
-        loadQuiz
-    } else {  //Funktion för att ladda quizresultat
-        quiz.innerHTML = `<h2>Du hade ${score} av ${foxquiz.length} rätt!</h2>`
-    }
-});
+};
 
 //Function som tar fram nästa fråga
 const nextQuestion = () =>{
+    resetAll();
     showQuestion();
 };
 
-
-//Function för att välja alternativ av svar
-const chooceAnswer = () =>{
-
+//Function för vilken knapp vi valt för svaret
+const chooceAnswer = (choice) =>{
+    const choosenAnswer = choice.target;
+    sumbitBtn.classList.remove("hide");
+   
+    if (foxquiz[currentQuiz].answers[currentQuiz].correct === true) score+=10;
+    console.log(foxquiz[currentQuiz].answers[currentQuiz].correct)
 };
 
-//Börjar spelet!!
+//Börjar spelet respektive går till nästa fråga, samt avsluta..!!
 startButton.addEventListener("click", startGame);
+sumbitBtn.addEventListener("click", () => {
+    currentQuiz++;
+    nextQuestion();
+});
+endGame.addEventListener("click",() =>{
+    points.innerText = `${score} poäng`
+    points.classList.remove("hide");
+    endGame.classList.add("hide");
+    questionTitle.style.fontSize = "30px";
 
+    if(score > 0){
+        questionTitle.innerText = `Du fick ${score} av ${foxquiz.length * 10} poäng! Bra jobbat!`;
+    } else {
+        questionTitle.innerText = `Tyvärr fick du ${score} poäng utav ${foxquiz.length * 10}! Bättre lycka nästa gång.`;
+    }
 
+});
 
 
 
@@ -71,41 +93,46 @@ startButton.addEventListener("click", startGame);
 const foxquiz = [
     {
         question: '1. Vad heter rödräv på latin?',
-        answer1: 'Vulpes vulpes',
-        answer2: 'Ulves ulves',
-        answer3: 'Foxes foxes',
-        correctAnswer: 'Vulpes vulpes',
+        answers: [
+             {text: "Vulpes vulpes", correct: true},
+             {text: "Ulves ulves", correct: false},
+             {text: "Foxes foxes", correct: false}
+        ],
     },
     {
         question: '2. Hur mycket väger en räv?',
-        answer1: '5-10 kg',
-        answer2: '10-15 kg',
-        answer3: '15-20 kg',
-        correctAnswer: '5-10 kg',
+        answers: [
+            {text: "5-10kg", correct: true},
+            {text: "10-15kg", correct: false},
+            {text: "15-20kg", correct: false}
+        ]
     },
 
     {
         question: '3. Hur många ungar får en rävhona per kull?',
-        answer1: '1-3',
-        answer2: '2-5',
-        answer3: '4-7',
-        correctAnswer: '4-7',
+        answers: [
+            {text: "1-3", correct: false},
+            {text: "2-5", correct: false},
+            {text: "4-7", correct: true}
+        ]
     },
 
     {
         question: '4. Vilka är rävens viktigaste sinnen?',
-        answer1: 'Hörselsinnet och luktsinnet',
-        answer2: 'Smaksinnet och hörselsinnet',
-        answer3: 'Smaksinnet',
-        correctAnswer: 'Hörselsinnet och luksinnet',
+        answers: [
+            {text: "Hörselsinnet och luktsinnet", correct: true},
+            {text: "Smaksinnet och hörselsinnet", correct: false},
+            {text: "Smaksinnet och luktsinnet", correct: false}
+        ]
     },
 
     {
         question: '5. Med vilka egenskaper brukar räven benämnas i fabler?',
-        answer1: 'Rolig och smart',
-        answer2: 'Snabb och smidig',
-        answer3: 'Klok och listig',
-        correctAnswer: 'Klok och listig',
+        answers: [
+            {text: "Rolig och smart", correct: false},
+            {text: "Snabb och smidig", correct: false},
+            {text: "Klok och listig", correct: true}
+        ]
     },
 
 ];
