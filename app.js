@@ -7,12 +7,14 @@ const points = document.querySelector(".result");
 const picture = document.getElementById("pic");
 const sumbitBtn = document.getElementById('svara');
 
+let button;
+let currentQuiz = 0; //Hålla räkningen för varv frågor 
+let score = 0; //Hålla koll på poäng
+
 sumbitBtn.style.fontSize = "30px";
 sumbitBtn.style.backgroundColor = "#a1683f";
 sumbitBtn.style.color = "#eee";
 
-let currentQuiz = 0; //Hålla räkningen för varv frågor 
-let score = 0; //Hålla koll på poäng
 
 //Function som startar spelet
 const startGame = () =>{
@@ -21,13 +23,14 @@ const startGame = () =>{
     nextQuestion();
 };
 
+
 //Function som visar frågan..
 const showQuestion = () =>{
     if (currentQuiz < foxquiz.length){
         questionTitle.innerText = foxquiz[currentQuiz].question;
 
         foxquiz[currentQuiz].answers.forEach(answer => {
-            const button = document.createElement("button");
+            button = document.createElement("button");
             button.innerText = answer.text;
             // console.log(answer)
             button.classList.add("btn");
@@ -43,6 +46,7 @@ const showQuestion = () =>{
     }
 };
 
+
 //Function som tar bort "överflödiga knappar" & tar bort hide från next.
 const resetAll = () => {
     sumbitBtn.classList.add("hide");
@@ -51,11 +55,13 @@ const resetAll = () => {
     }
 };
 
+
 //Function som tar fram nästa fråga
 const nextQuestion = () =>{
     resetAll();
     showQuestion();
 };
+
 
 //Function för vilken knapp vi valt för svaret
 const chooceAnswer = (choice) =>{
@@ -66,7 +72,12 @@ const chooceAnswer = (choice) =>{
     if (choice.target.getAttribute("answer") === "true") {
         score+= 10;
     }
+    while(answerButtons.firstChild){
+        answerButtons.removeChild(answerButtons.firstChild)
+    }
+    questionTitle.innerText = choice.target.getAttribute("answer") === "true" ? "Rätt!!" : "Tyvärr, fel.";
 };
+
 
 //Börjar spelet respektive går till nästa fråga, samt avsluta..!!
 startButton.addEventListener("click", startGame);
