@@ -1,3 +1,4 @@
+//Deklarera golbala variabler
 const startButton = document.getElementById("start-game");
 const questionTitle = document.querySelector(".question-title");
 const answerButtons = document.querySelector(".answer");
@@ -10,8 +11,8 @@ sumbitBtn.style.fontSize = "30px";
 sumbitBtn.style.backgroundColor = "#a1683f";
 sumbitBtn.style.color = "#eee";
 
-let currentQuiz = 0;
-let score = 0;
+let currentQuiz = 0; //Hålla räkningen för varv frågor 
+let score = 0; //Hålla koll på poäng
 
 //Function som startar spelet
 const startGame = () =>{
@@ -28,7 +29,7 @@ const showQuestion = () =>{
         foxquiz[currentQuiz].answers.forEach(answer => {
             const button = document.createElement("button");
             button.innerText = answer.text;
-            console.log(answer)
+            // console.log(answer)
             button.classList.add("btn");
             answerButtons.appendChild(button);
             button.setAttribute("answer", answer.correct)
@@ -61,11 +62,10 @@ const chooceAnswer = (choice) =>{
     const choosenAnswer = choice.target;
     sumbitBtn.classList.remove("hide");
 
-    console.log(choice.target.getAttribute("answer")); 
+    // console.log(choice.target.getAttribute("answer")); 
     if (choice.target.getAttribute("answer") === "true") {
         score+= 10;
     }
-    console.log(score);
 };
 
 //Börjar spelet respektive går till nästa fråga, samt avsluta..!!
@@ -96,7 +96,7 @@ const foxquiz = [
     {
         question: '1. Vad heter rödräv på latin?',
         answers: [
-             {text: "Vulpes vulpes", correct: "true"},
+             {text: "Vulpes vulpes", correct: true},
              {text: "Ulves ulves", correct: false},
              {text: "Foxes foxes", correct: false}
         ],
@@ -104,7 +104,7 @@ const foxquiz = [
     {
         question: '2. Hur mycket väger en räv?',
         answers: [
-            {text: "5-10kg", correct: "true"},
+            {text: "5-10kg", correct: true},
             {text: "10-15kg", correct: false},
             {text: "15-20kg", correct: false}
         ]
@@ -115,14 +115,14 @@ const foxquiz = [
         answers: [
             {text: "1-3", correct: false},
             {text: "2-5", correct: false},
-            {text: "4-7", correct: "true"}
+            {text: "4-7", correct: true}
         ]
     },
 
     {
         question: '4. Vilka är rävens viktigaste sinnen?',
         answers: [
-            {text: "Hörselsinnet och luktsinnet", correct: "true"},
+            {text: "Hörselsinnet och luktsinnet", correct: true},
             {text: "Smaksinnet och hörselsinnet", correct: false},
             {text: "Smaksinnet och luktsinnet", correct: false}
         ]
