@@ -10,6 +10,7 @@ const sumbitBtn = document.getElementById('svara');
 let button;
 let currentQuiz = 0; //Hålla räkningen för varv frågor 
 let score = 0; //Hålla koll på poäng
+let fact;
 
 sumbitBtn.style.fontSize = "30px";
 sumbitBtn.style.backgroundColor = "#a1683f";
@@ -76,6 +77,26 @@ const chooceAnswer = (choice) =>{
         answerButtons.removeChild(answerButtons.firstChild)
     }
     questionTitle.innerText = choice.target.getAttribute("answer") === "true" ? "Rätt!!" : "Tyvärr, fel.";
+
+    fact = document.createElement("h1");
+    if(currentQuiz === 0){
+        answerButtons.appendChild(fact);
+        fact.innerHTML = `Latin för rödräv är vulpes vulpes. <br><br> Rödräven introducerades i Australien under 1800-talet.`
+    } else if (currentQuiz === 1){
+        answerButtons.appendChild(fact);
+        fact.innerHTML = `Rävar väger vanligtvis mellan 5-10kg. <br><br> Rävars diet består av möss, kaniner, fiskar, grodor, bär och insekter.`
+    } else if (currentQuiz === 2){
+        answerButtons.appendChild(fact);
+        fact.innerHTML = `Rävarhonor får 4-7 valpar per kull. <br><br>  Rävarna lever ensamma förutom under parningstiden. Rävhonan diar sina ungar under ca en månads tid i en håla i marken. Valparna matas genom att föräldrarna kräks upp halvsmält mat.`
+    } else if (currentQuiz === 3){
+        answerButtons.appendChild(fact);
+        fact.innerHTML = `De viktigaste sinnena för en räv är hörselsinnet och luktsinnet. <br><br> Vilda rävar lever i två år men kan leva upp till 14 år i fångenskap.`
+    } else if (currentQuiz === 4){
+        answerButtons.appendChild(fact);
+        fact.innerHTML = `I fabler benämns egenskaperna klok och listig. <br><br> Rävar förekommer i några klassiska fabler så som "Räven och druvorna" (som blivit ihågkommen med uttrycket surt sa räven).`
+    } else{
+        fact.classList.add("hide");
+    }
 };
 
 
