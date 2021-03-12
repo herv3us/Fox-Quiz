@@ -66,6 +66,10 @@ section .picture img{
 
 .btn:hover{
     transform: scale(.99);
+    cursor: pointer;
+    background-color: #a1683f;
+    color: #eee;
+    border: #eee 1px solid;
 }
 
 .answer .btn{

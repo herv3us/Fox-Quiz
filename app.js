@@ -4,12 +4,11 @@ const answerButtons = document.querySelector(".answer");
 const endGame = document.querySelector(".endGame");
 const points = document.querySelector(".result");
 const picture = document.getElementById("pic");
-// -----
-const a_text = document.getElementById('a_text');
-const b_text = document.getElementById('b_text');
-const c_text = document.getElementById('c_text');
 const sumbitBtn = document.getElementById('svara');
 
+sumbitBtn.style.fontSize = "30px";
+sumbitBtn.style.backgroundColor = "#a1683f";
+sumbitBtn.style.color = "#eee";
 
 let currentQuiz = 0;
 let score = 0;
@@ -21,10 +20,8 @@ const startGame = () =>{
     nextQuestion();
 };
 
-
 //Function som visar frågan..
 const showQuestion = () =>{
-   
     if (currentQuiz < foxquiz.length){
         questionTitle.innerText = foxquiz[currentQuiz].question;
 
@@ -36,10 +33,10 @@ const showQuestion = () =>{
             button.addEventListener("click", chooceAnswer);
             answerButtons.appendChild(button);
             picture.src = `/img/fox--${currentQuiz}.jpg`
-            
-                if(foxquiz[currentQuiz].answers.correct === true){
-                    score+=10;
-                }
+
+            // if(answer.correct){
+            //     score+=10;
+            // }
         });
     } else {
         endGame.classList.remove("hide");
@@ -55,19 +52,19 @@ const resetAll = () => {
     }
 };
 
-
 //Function som tar fram nästa fråga
 const nextQuestion = () =>{
     resetAll();
     showQuestion();
 };
 
-
-//Function för att välja alternativ av svar
+//Function för vilken knapp vi valt för svaret
 const chooceAnswer = (choice) =>{
     const choosenAnswer = choice.target;
     sumbitBtn.classList.remove("hide");
-    
+   
+    // if (foxquiz[currentQuiz].answers[currentQuiz].correct === true) score+=10;
+    // console.log(foxquiz[currentQuiz].answers[currentQuiz].correct)
 };
 
 //Börjar spelet respektive går till nästa fråga, samt avsluta..!!
@@ -83,13 +80,12 @@ endGame.addEventListener("click",() =>{
     questionTitle.style.fontSize = "30px";
 
     if(score > 0){
-        questionTitle.innerText = `Du hade ${score} av ${foxquiz.length * 10} rätt! Bra jobbat!`;
+        questionTitle.innerText = `Du fick ${score} av ${foxquiz.length * 10} poäng! Bra jobbat!`;
     } else {
         questionTitle.innerText = `Tyvärr fick du ${score} poäng utav ${foxquiz.length * 10}! Bättre lycka nästa gång.`;
     }
 
 });
-
 
 
 
@@ -120,13 +116,13 @@ const foxquiz = [
             {text: "4-7", correct: true}
         ]
     },
-    
+
     {
         question: '4. Vilka är rävens viktigaste sinnen?',
         answers: [
             {text: "Hörselsinnet och luktsinnet", correct: true},
             {text: "Smaksinnet och hörselsinnet", correct: false},
-            {text: "Smaksinnet", correct: false}
+            {text: "Smaksinnet och luktsinnet", correct: false}
         ]
     },
 
@@ -138,6 +134,6 @@ const foxquiz = [
             {text: "Klok och listig", correct: true}
         ]
     },
-    
+
 ];
 
