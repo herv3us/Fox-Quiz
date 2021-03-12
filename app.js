@@ -38,7 +38,7 @@ const showQuestion = () =>{
             answerButtons.appendChild(button);
             button.setAttribute("answer", answer.correct)
             button.addEventListener("click", chooceAnswer);
-            picture.src = `/img/fox--${currentQuiz}.jpg`
+            picture.src = `img/fox--${currentQuiz}.jpg`
 
         });
     } else {
